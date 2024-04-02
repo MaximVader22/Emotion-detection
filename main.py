@@ -7,7 +7,6 @@ from json import load as json_load, dump as json_dump
 import numpy as np
 import cv2
 
-
 # Модель по распознаванию эмоций
 model = load_model("emotion_recognition.h5")
 
