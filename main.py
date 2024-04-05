@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QCheckBox, QVBoxLayout, QLabel, QHBoxLayout, QSlider
 from PyQt5.QtGui import QFont, QImage
 from PyQt5 import QtCore, QtGui
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from sys import argv, exit
-from json import load as json_load, dump as json_dump
+from json import load as json_load, dump as json_dup
 import numpy as np
 import cv2
 
@@ -46,6 +46,8 @@ def process_the_frame(frame, sensitivity, gray=False):
             prediction = model.predict(face, verbose=0)
             cv2.rectangle(output_frame, (x1, y1), (x2, y2),
                           emotion_colors[max(enumerate(prediction[0]), key=lambda el: el[1])[0]], 2)
+            cv2.putText(output_frame, emotions[max(enumerate(prediction[0]), key=lambda el: el[1])[0]],
+                        (x1, y1 + 30), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2)
 
     height, width, channel = frame.shape
     bpl = 3 * width
